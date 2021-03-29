@@ -29,10 +29,11 @@ jobs:
             --tag gpoleze/pms:$RELEASE_VERSION \
             --platform linux/arm64 \
             -f Dockerfile.arm64 .
-      - name: build the adm64 image
-        run: |
-          docker buildx build --push \
-            --tag gpoleze/pms:latest \
-            --tag gpoleze/pms:$RELEASE_VERSION \
-            --platform linux/amd64 \
-            -f Dockerfile .
+#      - name: build the adm64 image
+#        run: |
+#          docker buildx build --push \
+#            --tag gpoleze/pms:latest \
+#            --tag gpoleze/pms:amd \
+#            --tag gpoleze/pms:$RELEASE_VERSION \
+#            --platform linux/amd64 \
+#            -f Dockerfile .
