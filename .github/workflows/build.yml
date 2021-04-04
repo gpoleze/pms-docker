@@ -41,7 +41,7 @@ jobs:
             --tag ${DOCKER_USER}/${IMAGE_REPO}:amd64-$RELEASE_VERSION \
             --platform linux/amd64 \
             -f Dockerfile .
-      - name: conciliate images to multi-arch
+      - name: conciliate images to multi-arch to latest
         run: |
           docker manifest create \
             ${DOCKER_USER}/${IMAGE_REPO}:latest \
@@ -52,7 +52,7 @@ jobs:
             ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-latest \
             --os linux --arch arm64 --variant v8 \
           && docker manifest push --purge ${DOCKER_USER}/${IMAGE_REPO}:latest
-      - name: conciliate images to multi-arch
+      - name: conciliate images to multi-arch ${$RELEASE_VERSION}
         run: |
           docker manifest create \
             ${DOCKER_USER}/${IMAGE_REPO}:${$RELEASE_VERSION} \
