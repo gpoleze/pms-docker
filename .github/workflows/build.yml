@@ -43,23 +43,23 @@ jobs:
             -f Dockerfile .
       - name: conciliate images to multi-arch to latest
         run: |
-          docker manifest create \
-            ${DOCKER_USER}/${IMAGE_REPO}:latest \
-            ${DOCKER_USER}/${IMAGE_REPO}:amd64-latest \
-            ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-latest \
-          && docker manifest annotate \
-            ${DOCKER_USER}/${IMAGE_REPO}:latest \
-            ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-latest \
-            --os linux --arch arm64 --variant v8 \
+          docker manifest create                            \
+            ${DOCKER_USER}/${IMAGE_REPO}:latest             \
+            ${DOCKER_USER}/${IMAGE_REPO}:amd64-latest       \
+            ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-latest     \
+          && docker manifest annotate                       \
+            ${DOCKER_USER}/${IMAGE_REPO}:latest             \
+            ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-latest     \
+            --os linux --arch arm64 --variant v8            \
           && docker manifest push --purge ${DOCKER_USER}/${IMAGE_REPO}:latest
-      - name: conciliate images to multi-arch ${$RELEASE_VERSION}
+      - name: conciliate images to multi-arch fo release version
         run: |
-          docker manifest create \
-            ${DOCKER_USER}/${IMAGE_REPO}:${$RELEASE_VERSION} \
-            ${DOCKER_USER}/${IMAGE_REPO}:amd64-${$RELEASE_VERSION} \
-            ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-${$RELEASE_VERSION} \
-          && docker manifest annotate \
-            ${DOCKER_USER}/${IMAGE_REPO}:${$RELEASE_VERSION} \
-            ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-${$RELEASE_VERSION} \
-            --os linux --arch arm64 --variant v8 \
+          docker manifest create                                      \
+            ${DOCKER_USER}/${IMAGE_REPO}:${$RELEASE_VERSION}          \
+            ${DOCKER_USER}/${IMAGE_REPO}:amd64-${$RELEASE_VERSION}    \
+            ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-${$RELEASE_VERSION}  \
+          && docker manifest annotate                                 \
+            ${DOCKER_USER}/${IMAGE_REPO}:${$RELEASE_VERSION}          \
+            ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-${$RELEASE_VERSION}  \
+            --os linux --arch arm64 --variant v8                      \
           && docker manifest push --purge ${DOCKER_USER}/${IMAGE_REPO}:${$RELEASE_VERSION}
