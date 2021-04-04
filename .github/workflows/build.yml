@@ -50,5 +50,5 @@ jobs:
           && docker manifest annotate \
             ${DOCKER_USER}/${IMAGE_REPO}:latest \
             ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-latest \
-            --os linux --arch arm64 --variant v8
+            --os linux --arch arm64 --variant v8 \
           && docker manifest push --purge ${DOCKER_USER}/${IMAGE_REPO}:latest
