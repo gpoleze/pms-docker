@@ -13,6 +13,9 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v2
 
+      - name: Set up QEMU for multi-arch build
+        uses: docker/setup-qemu-action@v1
+
       # Envs
       - name: Set DOCKER_USER env
         run: echo "DOCKER_USER=gpoleze" >> $GITHUB_ENV
