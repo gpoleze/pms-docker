@@ -36,7 +36,6 @@ jobs:
       - name: build the adm64 image
         run: |
           docker buildx build --push \
-            --tag ${DOCKER_USER}/${IMAGE_REPO}:latest \
             --tag ${DOCKER_USER}/${IMAGE_REPO}:amd64-latest \
             --tag ${DOCKER_USER}/${IMAGE_REPO}:amd64-$RELEASE_VERSION \
             --platform linux/amd64 \
