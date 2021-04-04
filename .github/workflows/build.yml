@@ -58,6 +58,7 @@ jobs:
         run: |
           docker manifest create                            \
             ${DOCKER_USER}/${IMAGE_REPO}:latest             \
+            ${DOCKER_USER}/${IMAGE_REPO}:amd64-latest     \
             ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-latest     \
           && docker manifest annotate                       \
             ${DOCKER_USER}/${IMAGE_REPO}:latest             \
@@ -69,6 +70,7 @@ jobs:
         run: |
           docker manifest create                                    \
             ${DOCKER_USER}/${IMAGE_REPO}:${RELEASE_VERSION}         \
+            ${DOCKER_USER}/${IMAGE_REPO}:amd64-${RELEASE_VERSION} \
             ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-${RELEASE_VERSION} \
           && docker manifest annotate                               \
             ${DOCKER_USER}/${IMAGE_REPO}:${RELEASE_VERSION}         \
