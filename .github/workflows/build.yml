@@ -49,14 +49,15 @@ jobs:
           docker buildx build --push \
             --tag ${DOCKER_USER}/${IMAGE_REPO}:amd64-latest \
             --tag ${DOCKER_USER}/${IMAGE_REPO}:amd64-$RELEASE_VERSION \
+            --tag ${DOCKER_USER}/${IMAGE_REPO}:latest \
+            --tag ${DOCKER_USER}/${IMAGE_REPO}:$RELEASE_VERSION \
             --platform linux/amd64 \
             -f Dockerfile .
 
       - name: conciliate images to multi-arch to latest
         run: |
-          docker manifest create --insecure                 \
+          docker manifest create                            \
             ${DOCKER_USER}/${IMAGE_REPO}:latest             \
-            ${DOCKER_USER}/${IMAGE_REPO}:amd64-latest       \
             ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-latest     \
           && docker manifest annotate                       \
             ${DOCKER_USER}/${IMAGE_REPO}:latest             \
@@ -66,10 +67,8 @@ jobs:
 
       - name: conciliate images to multi-arch for ${RELEASE_VERSION}
         run: |
-          docker manifest create --insecure                         \
+          docker manifest create                                    \
             ${DOCKER_USER}/${IMAGE_REPO}:${RELEASE_VERSION}         \
-            ${DOCKER_USER}/${IMAGE_REPO}:${RELEASE_VERSION}         \
-            ${DOCKER_USER}/${IMAGE_REPO}:amd64-${RELEASE_VERSION}   \
             ${DOCKER_USER}/${IMAGE_REPO}:arm64v8-${RELEASE_VERSION} \
           && docker manifest annotate                               \
             ${DOCKER_USER}/${IMAGE_REPO}:${RELEASE_VERSION}         \
